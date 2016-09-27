@@ -1,0 +1,18 @@
+npm install express
+
+create a file called server.js with the following contents:
+`
+var express = require('express');
+var app = express();
+
+app.use(express.static('./'));
+
+var server = app.listen(5613, function() {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('App listening at http://%s:%s', host, port);
+});
+`
+
+run `node server.js` from the command line in that directory

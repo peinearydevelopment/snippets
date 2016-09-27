@@ -1,0 +1,4 @@
+using (var file = new StreamWriter(@"FILE_OF_PATH_TO_WRITE_TO"))
+{
+    file.WriteLine($"STUFF_TO_WRITE_TO_FILE");
+}

@@ -1,0 +1,11 @@
+// don't need to include import in classes Service is injected into
+import {Service} from 'service';
+
+export function configure(aurelia) {
+    aurelia.use.singleton(Service);
+    aurelia.use.transient(Service);
+
+    var service = new Service();
+    service.prop = 'val';
+    aurelia.use.instance("Service", service);
+}

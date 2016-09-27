@@ -1,0 +1,31 @@
+Application ExcelApplication = new Application();
+Workbook ExcelWorkbook = ExcelApplication.Workbooks.Open(@"PATH_TO_EXCEL_FILE", 0, true, 5, string.Empty, string.Empty, false, XlPlatform.xlWindows, string.Empty, false, false, 0, true, false, false);;
+Worksheet ExcelWorksheet = (Worksheet)ExcelWorkbook.Worksheets.Item[1];
+
+var lastCell = WorksheetRead.Cells.SpecialCells(XlCellType.xlCellTypeLastCell); // find last used cell in worksheet -- good as an iteration boundary
+
+var cellRange = (Range)ExcelWorksheet.Cells[ROW_ID, COLUMN_ID]; // both ROW_ID and COLUMN_ID are 1 based values
+cellRange.Value2 = $"'{VALUE_TO_PLACE_IN_CELL}"; // put a ' in front of the value so that it won't automatically convert a 'bigint' into a number expressed with an exponent
+cellRange.Interior.Color = ColorTranslator.ToOle(Color.SkyBlue); // change cell color
+ReleaseObject(cellRange);
+
+ReleaseObject(ExcelWorksheet);
+ReleaseObject(ExcelApplication.Worksheets);
+ExcelWorkbook.Close(0);
+ReleaseObject(ExcelWorkbook);
+ReleaseObject(ExcelApplication.Workbooks);
+ExcelApplication.Quit();
+ReleaseObject(ExcelApplication);
+
+private static void ReleaseObject(object obj)
+{
+    try
+    {
+        System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+    }
+    finally
+    {
+        obj = null;
+        GC.Collect();
+    }
+}
