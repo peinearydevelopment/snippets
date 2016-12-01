@@ -1,0 +1,16 @@
+error example:
+        at TLSSocket.addListener (events.js:239:17)
+        at TLSSocket.Readable.on (_stream_readable.js:680:33)
+        at Request.<anonymous> (C:\Users\BambooService\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:153:7)
+        at emitOne (events.js:77:13)
+        at Request.emit (events.js:169:7)
+        at ClientRequest.<anonymous> (C:\Users\BambooService\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:791:10)
+        at emitOne (events.js:82:20)
+        at ClientRequest.emit (events.js:169:7)
+        at tickOnSocket (_http_client.js:523:7)
+        at onSocketNT (_http_client.js:535:5)
+    (node) warning: possible EventEmitter memory leak detected. 11 error listeners added. Use emitter.setMaxListeners() to increase limit.
+    Trace
+fix found here:
+    https://github.com/npm/npm/issues/13656
+    npm update -g npm

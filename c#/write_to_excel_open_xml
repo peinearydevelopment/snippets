@@ -1,0 +1,37 @@
+SpreadsheetDocument Spreadsheet = SpreadsheetDocument.Create(@"PATH", SpreadsheetDocumentType.Workbook);
+WorkbookPart workbookpart = Spreadsheet.AddWorkbookPart();
+workbookpart.Workbook = new Workbook();
+
+// Add a WorksheetPart to the WorkbookPart.
+WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+// Add Sheets to the Workbook.
+Sheets sheets = Spreadsheet.WorkbookPart.Workbook.AppendChild(new Sheets());
+
+// Append a new worksheet and associate it with the workbook.
+Sheet sheet = new Sheet() { Id = Spreadsheet.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "mySheet" };
+sheets.Append(sheet);
+
+// Get the sheetData cell table.
+SheetData Table = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+Row row = new Row();
+row.AppendCell("foo");
+
+public static void AppendCell(this Row row, string value)
+{
+    row.AppendChild(new Cell { CellValue = new CellValue(value ?? string.Empty), DataType = new EnumValue<CellValues>(CellValues.String) });
+}
+
+public static void AppendCell(this Row row, decimal? value)
+{
+    row.AppendChild(new Cell { CellValue = new CellValue(value?.ToString() ?? string.Empty), DataType = new EnumValue<CellValues>(CellValues.Number) });
+}
+
+public static void AppendCell(this Row row, DateTime? value)
+{
+    row.AppendChild(new Cell { CellValue = new CellValue(value?.ToString("MM/dd/yyyy") ?? string.Empty), DataType = new EnumValue<CellValues>(CellValues.String) });
+}
+
+Table.Append(row);
