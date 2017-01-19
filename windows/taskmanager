@@ -1,0 +1,8 @@
+Tasks location: C:\Windows\System32\Tasks
+MSDN documentation location: https://msdn.microsoft.com/en-us/library/windows/desktop/aa383614(v=vs.85).aspx
+MSDN schema documentation location: https://msdn.microsoft.com/en-us/library/windows/desktop/aa383609(v=vs.85).aspx
+Interval documentation location: https://msdn.microsoft.com/en-us/library/windows/desktop/aa382993(v=vs.85).aspx
+
+Interval notes:
+  The format for this string is P<days>DT<hours>H<minutes>M<seconds>S.
+  The maximum time allowed is 31 days, and the minimum time allowed is 1 minute.
