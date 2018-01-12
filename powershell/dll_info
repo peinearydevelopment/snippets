@@ -1,0 +1,2 @@
+# gives version number and publickeytoken
+([system.reflection.assembly]::loadfile("FULL_PATH_TO_DLL")).FullName
