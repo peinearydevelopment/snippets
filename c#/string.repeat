@@ -1,0 +1,10 @@
+// https://gunnarpeipman.com/csharp/string-repeat/
+public static class StringExtensions
+{
+    public static string Repeat(this string s, int n)
+    {
+        return new StringBuilder(s.Length * n)
+                        .AppendJoin(s, new string[n+1])
+                        .ToString();
+    }
+}
